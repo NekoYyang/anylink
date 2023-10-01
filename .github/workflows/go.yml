@@ -42,5 +42,4 @@ jobs:
 
       - name: Upload coverage to Codecov
         run: |
-          cd server
-          bash <(curl -s https://codecov.io/bash)
+          ls
