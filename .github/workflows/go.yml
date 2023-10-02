@@ -50,9 +50,18 @@ jobs:
         run: |
           cd server
           ls
-      - name: Release
+
+  release:
+    name: Release
+    needs: build # 依赖上面的构建步骤
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Release
+        id: create_release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: server/anylink
+          files: |
+            server/anylink # 将你的二进制文件添加到发布中
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub Token，用于创建发布
 
