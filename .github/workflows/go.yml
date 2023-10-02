@@ -63,6 +63,8 @@ jobs:
           files: |
             server/anylink # 将你的二进制文件添加到发布中
           token: ${{ secrets.GITHUB_TOKEN }} # GitHub Token，用于创建发布
+          tag_name: 114
+          release_name: 114514
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
