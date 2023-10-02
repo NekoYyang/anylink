@@ -1,10 +1,10 @@
-name: Go
+name: CI/CD
 
 on:
   push:
-    branches: [ "main", "dev" ]
+    branches: [ "main" ] # 只在main分支上触发
   pull_request:
-    branches: [ "main", "dev" ]
+    branches: [ "main" ] # 只在main分支上触发
 
 jobs:
 
@@ -52,7 +52,18 @@ jobs:
           cd server
           ls
 
-      - name: Upload coverage to Codecov
-        run: |
-          cd server
-          ls
+  release:
+    name: Release
+    needs: build # 依赖上面的构建步骤
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          files: |
+            server/anylink # 将你的二进制文件添加到发布中
+          token: ${{ secrets.GITHUB_TOKEN }} # GitHub Token，用于创建发布
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
