@@ -45,7 +45,6 @@ jobs:
           go build -v -o anylink -ldflags "-X main.CommitId=`git rev-parse HEAD`"
           ./anylink tool -v
           ls
-          ./anylink
 
       - name: Test coverage
         run: |
